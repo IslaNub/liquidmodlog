@@ -566,8 +566,6 @@ class liquidmodlog:
         db = fileIO(self.direct, "load")
         if not server.id in db:
             return
-        if db[server.id]['toggleuser'] and db[server.id]['toggleroles'] == False:
-            return
         channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
         fmt = '%H:%M:%S'
@@ -610,7 +608,7 @@ class liquidmodlog:
                 new = ''.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
                 role = discord.Embed(description=name, colour=discord.Color.red())
-                infomessage = "__{}__ has left the server.".format(before.nick if before.nick else before.name)
+                infomessage = "Update to __{}__'s roles.".format(before.nick if before.nick else before.name)
                 role.add_field(name="Info:", value=infomessage, inline=False)
                 role.add_field(name="Old roles:", value=old, inline=False)
                 role.add_field(name="New roles:", value=new, inline=False)
