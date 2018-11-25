@@ -616,9 +616,9 @@ class liquidmodlog:
                 role.add_field(name="New roles:", value=new, inline=False)
                 role.set_footer(text="User ID: {}".format(before.id))
                 role.set_author(name=time.strftime(fmt) + " - Leaving User",
-                                url="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11928-outbox-tray.png")
+                                url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
                 role.set_thumbnail(
-                    url="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11928-outbox-tray.png")
+                    url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
                 try:
                     await self.bot.send_message(server.get_channel(channel), embed=role)
                 except:
