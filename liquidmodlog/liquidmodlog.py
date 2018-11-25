@@ -564,21 +564,38 @@ class liquidmodlog:
     async def on_member_update(self, before, after):
         server = before.server
         db = fileIO(self.direct, "load")
+        if not server.id in db:
+            return
+        if db[server.id]['toggleuser'] and db[server.id]['toggleroles'] == False:
+            return
         channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
         fmt = '%H:%M:%S'
-        name = before
-        name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-        updmessage = discord.Embed(description=name, colour=discord.Color.orange())
-        infomessage = "__{}__'s nickname has changed".format(before.name)
-        updmessage.add_field(name="Info:", value=infomessage, inline=False)
-        updmessage.add_field(name="Nickname Before:", value=before.nick)
-        updmessage.add_field(name="Nickname After:", value=after.nick)
-        updmessage.set_footer(text="User ID: {}".format(before.id))
-        updmessage.set_author(name=time.strftime(fmt) + " - Nickname Changed",
-                              url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
-        updmessage.set_thumbnail(url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
-        await self.bot.send_message(server.get_channel(channel), embed=updmessage)
+        if not before.roles == after.roles:
+            if db[server.id]["embed"] == True:
+                name = before
+                name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
+                role = discord.Embed(description=name, colour=discord.Color.light_grey())
+                infomessage = "New nick for __{}__.".format(before.nick if before.nick else before.name)
+                role.add_field(name="Info:", value=infomessage, inline=False)
+                role.add_field(name="Old nick:", value=before.nick, inline=False)
+                role.add_field(name="New nick:", value=after.nick, inline=False)
+                role.set_footer(text="User ID: {}".format(before.id))
+                role.set_author(name=time.strftime(fmt) + " - Roles Update",
+                                url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
+                role.set_thumbnail(
+                    url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
+                try:
+                    await self.bot.send_message(server.get_channel(channel), embed=role)
+                except:
+                    await self.bot.send_message(server.get_channel(channel),
+                                                "How is embed going to work when I don't have embed links permissions?")
+            if db[server.id]["embed"] == False:
+                msg = ":person_with_pouting_face::skin-tone-3: `{}` **{}'s** roles have changed. Old: `{}` New: `{}`".format(
+                    time.strftime(fmt), before.name, ", ".join([r.name for r in before.roles]),
+                    ", ".join([r.name for r in after.roles]))
+                await self.bot.send_message(server.get_channel(channel),
+                                            msg)
             
     async def on_member_update(self, before, after):
         server = before.server
@@ -596,16 +613,16 @@ class liquidmodlog:
                 old = '; '.join([r.name for r in before.roles])
                 new = '; '.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-                role = discord.Embed(description=name, colour=discord.Color.green())
+                role = discord.Embed(description=name, colour=discord.Color.light_grey())
                 infomessage = "Update to __{}__'s roles.".format(before.nick if before.nick else before.name)
                 role.add_field(name="Info:", value=infomessage, inline=False)
                 role.add_field(name="Old roles:", value=old, inline=False)
                 role.add_field(name="New roles:", value=new, inline=False)
                 role.set_footer(text="User ID: {}".format(before.id))
                 role.set_author(name=time.strftime(fmt) + " - Roles Update",
-                                url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
+                                url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
                 role.set_thumbnail(
-                    url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
+                    url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
                 try:
                     await self.bot.send_message(server.get_channel(channel), embed=role)
                 except:
