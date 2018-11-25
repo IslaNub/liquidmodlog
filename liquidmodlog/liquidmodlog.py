@@ -18,11 +18,18 @@ class liquidmodlog:
     
     def __init__(self, bot):
         self.bot = bot
+
+    def channel(self):
+        c = self.bot.get_channel(439026223025225730)
+        return c
         
-    @commands.command(pass_context = True)
-    async def testingwork(self, ctx):
-        await self.bot.say('Yeet')
-        
+    async def on_message_edit(self, before, after):
+        b = "**Before:**\n" +
+            "*{}*".format(before)
+        b = "**After:**\n" +
+            "*{}*".format(after)
+        m = "{}\n{}".format(b, a)
+        await self.bot.send_message(self.c(), m)
         
 def setup(bot):
     n = liquidmodlog(bot)
