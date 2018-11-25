@@ -562,27 +562,27 @@ class liquidmodlog:
                                             after.self_deaf, after.mute, after.deaf))
 
     async def on_member_update(self, before, after):
-        server = before.server
-        db = fileIO(self.direct, "load")
-        if not server.id in db:
-        channel = db[server.id]["Channel"]
-        time = datetime.datetime.now()
-        fmt = '%H:%M:%S'
-        name = before
-        name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-        updmessage = discord.Embed(description=name, colour=discord.Color.orange())
-        infomessage = "__{}__'s nickname has changed".format(before.name)
-        updmessage.add_field(name="Info:", value=infomessage, inline=False)
-        updmessage.add_field(name="Nickname Before:", value=before.nick)
-        updmessage.add_field(name="Nickname After:", value=after.nick)
-        updmessage.set_footer(text="User ID: {}".format(before.id))
-        updmessage.set_author(name=time.strftime(fmt) + " - Nickname Changed",
-                              url="http://i.imgur.com/I5q71rj.png")
-        updmessage.set_thumbnail(url="http://i.imgur.com/I5q71rj.png")
-        try:
-            await self.bot.send_message(server.get_channel(channel), embed=updmessage)
-        except Exception as e:
-            await self.bot.send_message(server.get_channel(channel), e)
+      server = before.server
+      db = fileIO(self.direct, "load")
+      if not server.id in db:
+      channel = db[server.id]["Channel"]
+      time = datetime.datetime.now()
+      fmt = '%H:%M:%S'
+      name = before
+      name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
+      updmessage = discord.Embed(description=name, colour=discord.Color.orange())
+      infomessage = "__{}__'s nickname has changed".format(before.name)
+      updmessage.add_field(name="Info:", value=infomessage, inline=False)
+      updmessage.add_field(name="Nickname Before:", value=before.nick)
+      updmessage.add_field(name="Nickname After:", value=after.nick)
+      updmessage.set_footer(text="User ID: {}".format(before.id))
+      updmessage.set_author(name=time.strftime(fmt) + " - Nickname Changed",
+                            url="http://i.imgur.com/I5q71rj.png")
+      updmessage.set_thumbnail(url="http://i.imgur.com/I5q71rj.png")
+      try:
+          await self.bot.send_message(server.get_channel(channel), embed=updmessage)
+      except Exception as e:
+          await self.bot.send_message(server.get_channel(channel), e)
     async def on_member_update(self, before, after):
         server = before.server
         db = fileIO(self.direct, "load")
