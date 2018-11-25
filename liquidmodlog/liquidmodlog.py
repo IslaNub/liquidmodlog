@@ -584,8 +584,8 @@ class liquidmodlog:
                 updmessage.set_thumbnail(url="http://i.imgur.com/I5q71rj.png")
                 try:
                     await self.bot.send_message(server.get_channel(channel), embed=updmessage)
-                except:
-                    pass
+                except Exception as e:
+                    await self.bot.send_message(server.get_channel(channel), e)
             else:
                 await self.bot.send_message(server.get_channel(channel),
                                             ":person_with_pouting_face::skin-tone-3: `{}` **{}** changed their nickname from **{}** to **{}**".format(
