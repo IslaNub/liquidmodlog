@@ -49,7 +49,7 @@ class liquidmodlog:
         delmessage.set_footer(text="User ID: {}".format(before.author.id))
         delmessage.set_author(name=time.strftime(fmt) + " - Edited Message", url="http://i.imgur.com/Q8SzUdG.png")
         delmessage.set_thumbnail(url="http://i.imgur.com/Q8SzUdG.png")
-        await self.bot.send_message(self.c(), embed = delmessage)
+        await self.bot.send_message(self.channel(), embed = delmessage)
         
 def setup(bot):
     n = liquidmodlog(bot)
