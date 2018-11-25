@@ -596,16 +596,16 @@ class liquidmodlog:
                 old = '; '.join([r.name for r in before.roles])
                 new = '; '.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-                role = discord.Embed(description=name, colour=discord.Color.light_grey())
+                role = discord.Embed(description=name, colour=discord.Color.green())
                 infomessage = "Update to __{}__'s roles.".format(before.nick if before.nick else before.name)
                 role.add_field(name="Info:", value=infomessage, inline=False)
                 role.add_field(name="Old roles:", value=old, inline=False)
                 role.add_field(name="New roles:", value=new, inline=False)
                 role.set_footer(text="User ID: {}".format(before.id))
-                role.set_author(name=time.strftime(fmt) + " - Leaving User",
-                                url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
+                role.set_author(name=time.strftime(fmt) + " - Roles Update",
+                                url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
                 role.set_thumbnail(
-                    url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12121-anticlockwise-downwards-and-upwards-open-circle-arrows.png")
+                    url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
                 try:
                     await self.bot.send_message(server.get_channel(channel), embed=role)
                 except:
