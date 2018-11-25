@@ -25,6 +25,7 @@ class liquidmodlog:
         
     async def on_message_edit(self, before, after):
         if before.author.id != '413945138914656276':
+            cleanbefore = before.content
             name = before.author
             name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
             delmessage = discord.Embed(description=name, colour=discord.Color.green())
