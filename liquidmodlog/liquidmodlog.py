@@ -36,7 +36,6 @@ class liquidmodlog:
         cleanafter = after.content
         for i in after.mentions:
             cleanafter = cleanafter.replace(i.mention, str(i))
-        channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
         fmt = '%H:%M:%S'
         name = before.author
@@ -50,6 +49,7 @@ class liquidmodlog:
         delmessage.set_footer(text="User ID: {}".format(before.author.id))
         delmessage.set_author(name=time.strftime(fmt) + " - Edited Message", url="http://i.imgur.com/Q8SzUdG.png")
         delmessage.set_thumbnail(url="http://i.imgur.com/Q8SzUdG.png")
+        await self.bot.send_message(self.c(), embed = delmessage)
         
 def setup(bot):
     n = liquidmodlog(bot)
