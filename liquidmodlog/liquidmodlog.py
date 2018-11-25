@@ -29,7 +29,7 @@ class liquidmodlog:
         b = "**After:**\n" +
             "*{}*".format(after)
         m = "{}\n{}".format(b, a)
-        await self.bot.send_message(self.c(), m)
+        await self.bot.send_message(self.channel(), m)
         
 def setup(bot):
     n = liquidmodlog(bot)
