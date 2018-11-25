@@ -604,8 +604,8 @@ class liquidmodlog:
         if not before.roles == after.roles:
             if db[server.id]["embed"] == True:
                 name = before
-                old = ''.join([r.name for r in before.roles])
-                new = ''.join([r.name for r in after.roles])
+                old = ', '.join([r.name for r in before.roles])
+                new = ', '.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
                 role = discord.Embed(description=name, colour=discord.Color.light_grey())
                 infomessage = "Update to __{}__'s roles.".format(before.nick if before.nick else before.name)
