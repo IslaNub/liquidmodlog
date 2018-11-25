@@ -20,7 +20,7 @@ class liquidmodlog:
         self.bot = bot
 
     def channel(self):
-        c = self.bot.get_channel(439026223025225730)
+        c = self.bot.get_channel('439026223025225730')
         return c
         
     async def on_message_edit(self, before, after):
