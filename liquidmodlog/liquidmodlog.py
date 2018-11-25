@@ -25,12 +25,16 @@ class liquidmodlog:
         
     async def on_message_edit(self, before, after):
         if before.author.id != '413945138914656276':
-            b = "**Before:**\n" \
-                + "*{}*".format(before.content)
-            a = "**After:**\n" \
-                + "*{}*".format(after.content)
-            m = "{}\n{}".format(b, a)
-            await self.bot.send_message(self.channel(), m)
+            name = message.author
+            name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
+            delmessage = discord.Embed(description=name, colour=discord.Color.purple())
+            infomessage = "A message by owo __{}__, was deleted in {}".format(
+                message.author.nick if message.author.nick else message.author.name, message.channel.mention)
+            delmessage.add_field(name="Info:", value=infomessage, inline=False)
+            delmessage.add_field(name="Message:", value=cleanmsg)
+            delmessage.set_footer(text="User ID: {}".format(message.author.id))
+            delmessage.set_author(name=time.strftime(fmt) + " - Deleted Message", url="http://i.imgur.com/fJpAFgN.png")
+            delmessage.set_thumbnail(url="http://i.imgur.com/fJpAFgN.png")
         
 def setup(bot):
     n = liquidmodlog(bot)
