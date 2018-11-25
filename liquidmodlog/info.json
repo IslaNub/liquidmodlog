@@ -1,0 +1,9 @@
+{
+	"AUTHOR": "IslaNub",	"SHORT": "liquidmodlog",
+	"DESCRIPTION": "Mod LOgs for Team Liquid Mobile",
+	"DISABLED": false,
+	"NAME": "liquidmodlog",
+	"REQUIREMENTS": [],
+	"TAGS": ["modlogs"],
+	"INSTALL_MSG": "Ash is cute!"
+}
