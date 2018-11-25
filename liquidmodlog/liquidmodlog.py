@@ -606,8 +606,8 @@ class liquidmodlog:
         if not before.roles == after.roles:
             if db[server.id]["embed"] == True:
                 name = member
-                old = ".join([r.name for r in before.roles])
-                new = ".join([r.name for r in after.roles])
+                old = ''.join([r.name for r in before.roles])
+                new = ''.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
                 role = discord.Embed(description=name, colour=discord.Color.red())
                 infomessage = "__{}__ has left the server.".format(member.nick if member.nick else member.name)
