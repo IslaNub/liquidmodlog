@@ -27,7 +27,7 @@ class liquidmodlog:
     async def on_message_edit(self, before, after):
         if before.author.id != '413945138914656276':
             if before.content == after.content:
-            return
+                return
         if before.author.bot:
             return
         cleanbefore = before.content
