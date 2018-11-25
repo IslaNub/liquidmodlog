@@ -605,7 +605,7 @@ class liquidmodlog:
         fmt = '%H:%M:%S'
         if not before.roles == after.roles:
             if db[server.id]["embed"] == True:
-                name = member
+                name = before.member
                 old = ''.join([r.name for r in before.roles])
                 new = ''.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
