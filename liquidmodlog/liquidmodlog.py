@@ -25,16 +25,17 @@ class liquidmodlog:
         
     async def on_message_edit(self, before, after):
         if before.author.id != '413945138914656276':
-            name = message.author
+            name = before.author
             name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-            delmessage = discord.Embed(description=name, colour=discord.Color.purple())
-            infomessage = "A message by owo __{}__, was deleted in {}".format(
-                message.author.nick if message.author.nick else message.author.name, message.channel.mention)
+            delmessage = discord.Embed(description=name, colour=discord.Color.green())
+            infomessage = "A message by owo __{}__, was edited in {}".format(
+                before.author.nick if before.author.nick else before.author.name, before.channel.mention)
             delmessage.add_field(name="Info:", value=infomessage, inline=False)
-            delmessage.add_field(name="Message:", value=cleanmsg)
-            delmessage.set_footer(text="User ID: {}".format(message.author.id))
-            delmessage.set_author(name=time.strftime(fmt) + " - Deleted Message", url="http://i.imgur.com/fJpAFgN.png")
-            delmessage.set_thumbnail(url="http://i.imgur.com/fJpAFgN.png")
+            delmessage.add_field(name="Before Message:", value=cleanbefore, inline=False)
+            delmessage.add_field(name="After Message:", value=cleanafter)
+            delmessage.set_footer(text="User ID: {}".format(before.author.id))
+            delmessage.set_author(name=time.strftime(fmt) + " - Edited Message", url="http://i.imgur.com/Q8SzUdG.png")
+            delmessage.set_thumbnail(url="http://i.imgur.com/Q8SzUdG.png")
         
 def setup(bot):
     n = liquidmodlog(bot)
