@@ -24,12 +24,13 @@ class liquidmodlog:
         return c
         
     async def on_message_edit(self, before, after):
-        b = "**Before:**\n" \
-            + "*{}*".format(before.content)
-        a = "**After:**\n" \
-            + "*{}*".format(after.content)
-        m = "{}\n{}".format(b, a)
-        await self.bot.send_message(self.channel(), m)
+        if before.author.id != '413945138914656276':
+            b = "**Before:**\n" \
+                + "*{}*".format(before.content)
+            a = "**After:**\n" \
+                + "*{}*".format(after.content)
+            m = "{}\n{}".format(b, a)
+            await self.bot.send_message(self.channel(), m)
         
 def setup(bot):
     n = liquidmodlog(bot)
