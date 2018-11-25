@@ -607,7 +607,7 @@ class liquidmodlog:
                 old = ''.join([r.name for r in before.roles])
                 new = ''.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-                role = discord.Embed(description=name, colour=discord.Color.red())
+                role = discord.Embed(description=name, colour=discord.Color.grey())
                 infomessage = "Update to __{}__'s roles.".format(before.nick if before.nick else before.name)
                 role.add_field(name="Info:", value=infomessage, inline=False)
                 role.add_field(name="Old roles:", value=old, inline=False)
