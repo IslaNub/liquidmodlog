@@ -576,12 +576,9 @@ class liquidmodlog:
         updmessage.add_field(name="Nickname After:", value=after.nick)
         updmessage.set_footer(text="User ID: {}".format(before.id))
         updmessage.set_author(name=time.strftime(fmt) + " - Nickname Changed",
-                              url="http://i.imgur.com/I5q71rj.png")
-        updmessage.set_thumbnail(url="http://i.imgur.com/I5q71rj.png")
-        try:
-            await self.bot.send_message(server.get_channel(channel), embed=updmessage)
-        except Exception as e:
-            await self.bot.send_message(server.get_channel(channel), e)
+                              url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
+        updmessage.set_thumbnail(url="https://www.emoji.co.uk/files/mozilla-emojis/symbols-mozilla/12065-black-universal-recycling-symbol.png")
+        await self.bot.send_message(server.get_channel(channel), embed=updmessage)
             
     async def on_member_update(self, before, after):
         server = before.server
