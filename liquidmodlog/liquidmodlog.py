@@ -237,6 +237,8 @@ class liquidmodlog:
             await self.bot.say("Ban messages disabled")
 
     async def on_message_delete(self, message):
+        if message.author.id == '413945138914656276':
+            return
         server = message.server
         db = fileIO(self.direct, "load")
         if not server.id in db:
@@ -614,7 +616,7 @@ class liquidmodlog:
                 role.set_thumbnail(
                     url="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11928-outbox-tray.png")
                 try:
-                    await self.bot.send_message(server.get_channel(channel), embed=leave)
+                    await self.bot.send_message(server.get_channel(channel), embed=role)
                 except:
                     await self.bot.send_message(server.get_channel(channel),
                                                 "How is embed going to work when I don't have embed links permissions?")
