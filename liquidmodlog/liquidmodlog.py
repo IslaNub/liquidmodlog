@@ -12,6 +12,7 @@ import base64
 import json
 import aiohttp
 import itertools
+import datetime
 
 class liquidmodlog:
     """liquidmodlog"""
@@ -25,18 +26,30 @@ class liquidmodlog:
         
     async def on_message_edit(self, before, after):
         if before.author.id != '413945138914656276':
-            cleanbefore = before.content
-            name = before.author
-            name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-            delmessage = discord.Embed(description=name, colour=discord.Color.green())
-            infomessage = "A message by owo __{}__, was edited in {}".format(
-                before.author.nick if before.author.nick else before.author.name, before.channel.mention)
-            delmessage.add_field(name="Info:", value=infomessage, inline=False)
-            delmessage.add_field(name="Before Message:", value=cleanbefore, inline=False)
-            delmessage.add_field(name="After Message:", value=cleanafter)
-            delmessage.set_footer(text="User ID: {}".format(before.author.id))
-            delmessage.set_author(name=time.strftime(fmt) + " - Edited Message", url="http://i.imgur.com/Q8SzUdG.png")
-            delmessage.set_thumbnail(url="http://i.imgur.com/Q8SzUdG.png")
+            if before.content == after.content:
+            return
+        if before.author.bot:
+            return
+        cleanbefore = before.content
+        for i in before.mentions:
+            cleanbefore = cleanbefore.replace(i.mention, str(i))
+        cleanafter = after.content
+        for i in after.mentions:
+            cleanafter = cleanafter.replace(i.mention, str(i))
+        channel = db[server.id]["Channel"]
+        time = datetime.datetime.now()
+        fmt = '%H:%M:%S'
+        name = before.author
+        name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
+        delmessage = discord.Embed(description=name, colour=discord.Color.green())
+        infomessage = "A message by owo __{}__, was edited in {}".format(
+            before.author.nick if before.author.nick else before.author.name, before.channel.mention)
+        delmessage.add_field(name="Info:", value=infomessage, inline=False)
+        delmessage.add_field(name="Before Message:", value=cleanbefore, inline=False)
+        delmessage.add_field(name="After Message:", value=cleanafter)
+        delmessage.set_footer(text="User ID: {}".format(before.author.id))
+        delmessage.set_author(name=time.strftime(fmt) + " - Edited Message", url="http://i.imgur.com/Q8SzUdG.png")
+        delmessage.set_thumbnail(url="http://i.imgur.com/Q8SzUdG.png")
         
 def setup(bot):
     n = liquidmodlog(bot)
