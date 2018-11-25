@@ -605,16 +605,16 @@ class liquidmodlog:
         fmt = '%H:%M:%S'
         if not before.roles == after.roles:
             if db[server.id]["embed"] == True:
-                name = before.member
+                name = before
                 old = ''.join([r.name for r in before.roles])
                 new = ''.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
                 role = discord.Embed(description=name, colour=discord.Color.red())
-                infomessage = "__{}__ has left the server.".format(member.nick if member.nick else member.name)
+                infomessage = "__{}__ has left the server.".format(before.nick if before.nick else before.name)
                 role.add_field(name="Info:", value=infomessage, inline=False)
                 role.add_field(name="Old roles:", value=old, inline=False)
                 role.add_field(name="New roles:", value=new, inline=False)
-                role.set_footer(text="User ID: {}".format(member.id))
+                role.set_footer(text="User ID: {}".format(before.id))
                 role.set_author(name=time.strftime(fmt) + " - Leaving User",
                                 url="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11928-outbox-tray.png")
                 role.set_thumbnail(
