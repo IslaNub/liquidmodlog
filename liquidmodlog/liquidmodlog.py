@@ -564,7 +564,6 @@ class liquidmodlog:
     async def on_member_update(self, before, after):
         server = before.server
         db = fileIO(self.direct, "load")
-        if not server.id in db:
         channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
         fmt = '%H:%M:%S'
