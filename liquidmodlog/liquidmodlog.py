@@ -565,32 +565,24 @@ class liquidmodlog:
         server = before.server
         db = fileIO(self.direct, "load")
         if not server.id in db:
-            return
         channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
         fmt = '%H:%M:%S'
-        if not before.nick == after.nick:
-            if db[server.id]["embed"] == True:
-                name = before
-                name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
-                updmessage = discord.Embed(description=name, colour=discord.Color.orange())
-                infomessage = "__{}__'s nickname has changed".format(before.name)
-                updmessage.add_field(name="Info:", value=infomessage, inline=False)
-                updmessage.add_field(name="Nickname Before:", value=before.nick)
-                updmessage.add_field(name="Nickname After:", value=after.nick)
-                updmessage.set_footer(text="User ID: {}".format(before.id))
-                updmessage.set_author(name=time.strftime(fmt) + " - Nickname Changed",
-                                      url="http://i.imgur.com/I5q71rj.png")
-                updmessage.set_thumbnail(url="http://i.imgur.com/I5q71rj.png")
-                try:
-                    await self.bot.send_message(server.get_channel(channel), embed=updmessage)
-                except Exception as e:
-                    await self.bot.send_message(server.get_channel(channel), e)
-            else:
-                await self.bot.send_message(server.get_channel(channel),
-                                            ":person_with_pouting_face::skin-tone-3: `{}` **{}** changed their nickname from **{}** to **{}**".format(
-                                                time.strftime(fmt), before.name, before.kick, after.nick))
-
+        name = before
+        name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
+        updmessage = discord.Embed(description=name, colour=discord.Color.orange())
+        infomessage = "__{}__'s nickname has changed".format(before.name)
+        updmessage.add_field(name="Info:", value=infomessage, inline=False)
+        updmessage.add_field(name="Nickname Before:", value=before.nick)
+        updmessage.add_field(name="Nickname After:", value=after.nick)
+        updmessage.set_footer(text="User ID: {}".format(before.id))
+        updmessage.set_author(name=time.strftime(fmt) + " - Nickname Changed",
+                              url="http://i.imgur.com/I5q71rj.png")
+        updmessage.set_thumbnail(url="http://i.imgur.com/I5q71rj.png")
+        try:
+            await self.bot.send_message(server.get_channel(channel), embed=updmessage)
+        except Exception as e:
+            await self.bot.send_message(server.get_channel(channel), e)
     async def on_member_update(self, before, after):
         server = before.server
         db = fileIO(self.direct, "load")
@@ -604,8 +596,8 @@ class liquidmodlog:
         if not before.roles == after.roles:
             if db[server.id]["embed"] == True:
                 name = before
-                old = ', '.join([r.name for r in before.roles])
-                new = ', '.join([r.name for r in after.roles])
+                old = '; '.join([r.name for r in before.roles])
+                new = '; '.join([r.name for r in after.roles])
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
                 role = discord.Embed(description=name, colour=discord.Color.light_grey())
                 infomessage = "Update to __{}__'s roles.".format(before.nick if before.nick else before.name)
