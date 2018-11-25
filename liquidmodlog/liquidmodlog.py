@@ -26,7 +26,7 @@ class liquidmodlog:
     async def on_message_edit(self, before, after):
         b = "**Before:**\n" \
             + "*{}*".format(before)
-        b = "**After:**\n" \
+        a = "**After:**\n" \
             + "*{}*".format(after)
         m = "{}\n{}".format(b, a)
         await self.bot.send_message(self.channel(), m)
